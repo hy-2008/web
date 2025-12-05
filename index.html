@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网站备案中 | 凌航达电子</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4CAF50',     // 主绿色
+            secondary: '#81C784',   // 浅绿色
+            accent: '#2E7D32',      // 深绿色
+            light: '#E8F5E9',       // 超浅绿
+            dark: '#1B5E20',        // 墨绿色
+          },
+          fontFamily: {
+            sans: ['PingFang SC', 'Comic Sans MS', 'Microsoft YaHei', 'cursive'],
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'bounce-slow': 'bounce 4s infinite',
+            'spin-slow': 'spin 8s linear infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'wiggle': 'wiggle 1s ease-in-out infinite',
+            'fade-in': 'fadeIn 1.5s ease-in-out',
+            'slide-up': 'slideUp 1s ease-out',
+            'scale-in': 'scaleIn 1s ease-out',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-15px)' },
+            },
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(50px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.8)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            }
+          }
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-glow {
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.7), 0 0 20px rgba(76, 175, 80, 0.5), 0 0 30px rgba(76, 175, 80, 0.3);
+      }
+      .cartoon-shadow {
+        box-shadow: 0 10px 15px -3px rgba(76, 175, 80, 0.2), 0 4px 6px -2px rgba(76, 175, 80, 0.1);
+      }
+      .bg-gradient-green {
+        background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 50%, #A5D6A7 100%);
+      }
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(76, 175, 80, var(--opacity));
+        animation: particleMove var(--duration) linear infinite;
+      }
+      .text-balance {
+        text-wrap: balance;
+      }
+    }
+  </style>
+  
+  <!-- 全局样式 -->
+  <style>
+    body {
+      height: 100vh;
+      overflow-x: hidden; /* 仅隐藏横向滚动，纵向保留（防止移动端内容溢出） */
+    }
+    
+    /* 粒子背景动画 - 优化性能 */
+    @keyframes particleMove {
+      0% {
+        transform: translate(var(--x-start), var(--y-start)) rotate(0deg);
+        opacity: var(--opacity);
+      }
+      100% {
+        transform: translate(var(--x-end), var(--y-end)) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* 404数字动画 - 优化缓动效果 */
+    .number-4 {
+      animation: number4 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+    .number-0 {
+      animation: number0 5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+    
+    @keyframes number4 {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(5deg); }
+      50% { transform: scale(1) rotate(0deg); }
+      75% { transform: scale(1.1) rotate(-5deg); }
+    }
+    
+    @keyframes number0 {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(-5deg); }
+      50% { transform: scale(1) rotate(0deg); }
+      75% { transform: scale(1.1) rotate(5deg); }
+    }
+    
+    /* 自定义滚动条 - 优化样式 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #E8F5E9;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #81C784;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4CAF50;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-green font-sans relative">
+  <!-- 粒子背景 -->
+  <div id="particles" class="absolute inset-0 z-0"></div>
+  
+  <!-- 卡通装饰元素 - 响应式优化 -->
+  <div class="absolute top-6 left-6 w-12 h-12 bg-primary/20 rounded-full animate-float hidden sm:block" style="animation-delay: 0.5s"></div>
+  <div class="absolute top-1/4 right-6 w-16 h-16 bg-secondary/20 rounded-full animate-float hidden md:block" style="animation-delay: 1s"></div>
+  <div class="absolute bottom-20 left-1/3 w-10 h-10 bg-accent/20 rounded-full animate-float hidden lg:block" style="animation-delay: 1.5s"></div>
+  
+  <!-- 备案提示卡通形象 - 优化移动端位置 -->
+  <div class="absolute bottom-8 right-6 md:bottom-16 md:right-16 animate-float animate-wiggle z-10">
+    <div class="relative">
+      <img src="https://picsum.photos/200/200?random=50" alt="备案中提示" class="w-20 md:w-28 lg:w-36 rounded-full cartoon-shadow">
+      <div class="absolute -top-3 -right-3 bg-primary text-white text-xs md:text-sm px-3 py-1 rounded-full shadow-lg animate-pulse-slow">
+        <i class="fa fa-file-text-o mr-1"></i>备案中
+      </div>
+    </div>
+  </div>
+  
+  <!-- 主内容区 - 精简冗余结构，优化文案排版 -->
+  <main class="container mx-auto px-4 min-h-screen flex flex-col items-center justify-center relative z-10 py-20 md:py-0">
+    <!-- 404数字 - 优化响应式尺寸 -->
+    <div class="flex items-center justify-center mb-6 animate-scale-in">
+      <span class="number-4 text-[clamp(6rem,18vw,12rem)] font-bold text-primary text-glow">4</span>
+      <span class="number-0 text-[clamp(6rem,18vw,12rem)] font-bold text-secondary text-glow mx-2 md:mx-4">0</span>
+      <span class="number-4 text-[clamp(6rem,18vw,12rem)] font-bold text-primary text-glow">4</span>
+    </div>
+    
+    <!-- 备案提示文案 - 增强视觉层次和友好性 -->
+    <div class="text-center max-w-2xl animate-slide-up text-balance">
+      <h1 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold text-accent mb-4 flex items-center justify-center gap-2">
+        <i class="fa fa-exclamation-circle text-primary"></i>
+        网站正在备案中
+      </h1>
+      <p class="text-gray-700 text-base md:text-lg mb-6 leading-relaxed">
+        您好！本网站目前处于备案审核阶段，暂时暂停对外开放。<br class="hidden sm:block">
+        我们会尽快完成备案流程，恢复正常访问，感谢您的理解与耐心等待！
+      </p>
+      
+      <!-- 备案进度提示（可选） -->
+      <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 cartoon-shadow mb-8 max-w-md mx-auto">
+        <div class="flex items-center gap-3 mb-2">
+          <i class="fa fa-clock-o text-primary text-lg"></i>
+          <span class="font-medium text-accent">备案进度</span>
+        </div>
+        <div class="w-full bg-light rounded-full h-2.5 mb-1">
+          <div class="bg-primary h-2.5 rounded-full animate-pulse-slow" style="width: 75%"></div>
+        </div>
+        <p class="text-xs text-gray-600">预计完成时间：2025年X月X日（以管局审核为准）</p>
+      </div>
+      
+      <!-- 联系方式（补充实用信息） -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:400-123-4567" class="bg-primary hover:bg-accent text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-xl font-medium flex items-center justify-center">
+          <i class="fa fa-phone mr-2"></i> 联系我们
+        </a>
+        <a href="mailto:contact@linghangda.com" class="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow-md hover:shadow-lg font-medium flex items-center justify-center">
+          <i class="fa fa-envelope mr-2"></i> 发送邮件
+        </a>
+      </div>
+    </div>
+  </main>
+  
+  <!-- 页脚 - 优化样式和信息 -->
+  <footer class="absolute bottom-0 w-full py-3 text-center text-gray-600 text-sm z-10 bg-light/50 backdrop-blur-sm">
+    <p>&copy; 2025 凌航达电子 版权所有 | 
+      <a href="#" class="text-primary hover:text-accent transition-colors">隐私政策</a> | 
+      <a href="#" class="text-primary hover:text-accent transition-colors">服务条款</a>
+    </p>
+    <p class="text-xs mt-1 text-gray-500">工信部ICP备案申请中：粤ICP备XXXXXXX号（审核中）</p>
+  </footer>
+  
+  <!-- JavaScript - 优化性能，减少不必要的计算 -->
+  <script>
+    // 生成粒子背景 - 优化性能：防抖处理+按需生成
+    let particleTimer = null;
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      particlesContainer.innerHTML = ''; // 清空原有粒子
+      
+      // 根据屏幕尺寸动态调整粒子数量（移动端减少数量）
+      const isMobile = window.innerWidth < 768;
+      const particleCount = isMobile ? 15 : 40;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // 随机属性 - 优化取值范围，避免过度动画
+        const size = Math.random() * 12 + 3; // 3-15px（原5-20px，减少性能消耗）
+        const opacity = Math.random() * 0.4 + 0.1; // 0.1-0.5
+        const duration = Math.random() * 15 + 8; // 8-23秒
+        const xStart = Math.random() * window.innerWidth;
+        const yStart = Math.random() * window.innerHeight;
+        const xEnd = Math.random() * window.innerWidth;
+        const yEnd = Math.random() * window.innerHeight;
+        
+        // 设置CSS变量
+        particle.style.setProperty('--opacity', opacity);
+        particle.style.setProperty('--duration', `${duration}s`);
+        particle.style.setProperty('--x-start', `${xStart}px`);
+        particle.style.setProperty('--y-start', `${yStart}px`);
+        particle.style.setProperty('--x-end', `${xEnd}px`);
+        particle.style.setProperty('--y-end', `${yEnd}px`);
+        
+        // 设置样式
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${xStart}px`;
+        particle.style.top = `${yStart}px`;
+        particle.style.animationDelay = `${Math.random() * 4}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // 页面加载完成后创建粒子
+    window.addEventListener('load', () => {
+      createParticles();
+      
+      // 平滑滚动（保留，但移除无效锚点处理）
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#' || !document.querySelector(targetId)) return;
+          
+          window.scrollTo({
+            top: document.querySelector(targetId).offsetTop,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+    
+    // 窗口大小变化时防抖生成粒子（原立即执行，优化为防抖）
+    window.addEventListener('resize', () => {
+      clearTimeout(particleTimer);
+      particleTimer = setTimeout(createParticles, 300);
+    });
+  </script>
+</body>
+</html>
